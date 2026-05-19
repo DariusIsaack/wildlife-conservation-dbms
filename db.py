@@ -1,8 +1,10 @@
 import psycopg2
+import os
 
 def get_connection():
-    conn = psycopg2.connect(
-        "postgresql://postgres.clsvleqivxwfiaflvcwb:shaluaolingadarius321@aws-0-eu-west-1.pooler.supabase.com:5432/postgres"
-    )
-    return conn
 
+    database_url = os.getenv("DATABASE_URL")
+
+    conn = psycopg2.connect(database_url)
+
+    return conn
