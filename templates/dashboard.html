@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<header>
+    <h1>Wildlife Conservation Monitoring System</h1>
+</header>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>System Dashboard</h2>
+
+        <div class="nav-links">
+            <a href="/animals">Manage Animals</a>
+            <a href="/habitats">Manage Habitats</a>
+            <a href="/observations">Observations</a>
+            <a href="/reports">Reports</a>
+        </div>
+
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h3>Total Animals</h3>
+            <p>{{ animal_count }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Habitats</h3>
+            <p>{{ habitat_count }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Observations</h3>
+            <p>{{ observation_count }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Incidents</h3>
+            <p>{{ incident_count }}</p>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

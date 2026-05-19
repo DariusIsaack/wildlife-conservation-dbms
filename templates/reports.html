@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Reports</title>
+
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<header>
+    <h1>Wildlife Reports & Analytics</h1>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>Animals Per Habitat</h2>
+        <div class="chart-container">
+            <canvas id="habitatChart"></canvas>
+        </div>
+        
+
+        <br>
+
+        <table border="1">
+            <tr>
+                <th>Habitat</th>
+                <th>Total Animals</th>
+            </tr>
+
+            {% for row in animals_per_habitat %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Observations Per Staff</h2>
+        <div class="chart-container">
+            <canvas id="staffChart"></canvas>
+        </div>
+        
+
+        <br>
+
+        <table border="1">
+            <tr>
+                <th>Staff</th>
+                <th>Total Observations</th>
+            </tr>
+
+            {% for row in observation_count %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Average Age Per Species</h2>
+
+        <table border="1">
+            <tr>
+                <th>Species</th>
+                <th>Average Age</th>
+            </tr>
+
+            {% for row in avg_age %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="card">
+        <h2>Animals With Incidents</h2>
+
+        <table border="1">
+            <tr>
+                <th>Animal</th>
+                <th>Incident</th>
+            </tr>
+
+            {% for row in incidents %}
+            <tr>
+                <td>{{ row[0] }}</td>
+                <td>{{ row[1] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <br>
+    <a href="/dashboard">Back to Dashboard</a>
+
+</div>
+
+<script>
+
+const habitatCtx = document.getElementById('habitatChart');
+
+new Chart(habitatCtx, {
+    type: 'bar',
+    data: {
+        labels: {{ habitat_labels | tojson }},
+        datasets: [{
+            label: 'Animals',
+            data: {{ habitat_counts | tojson }},
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true
+    }
+});
+
+const staffCtx = document.getElementById('staffChart');
+
+new Chart(staffCtx, {
+    type: 'pie',
+    data: {
+        labels: {{ staff_labels | tojson }},
+        datasets: [{
+            label: 'Observations',
+            data: {{ staff_counts | tojson }},
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: true
+    }
+});
+
+</script>
+
+</body>
+</html>

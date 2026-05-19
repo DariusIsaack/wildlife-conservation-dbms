@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet"
+href="{{ url_for('static', filename='style.css') }}">
+    <title>Animals</title>
+</head>
+<body>
+<header>
+<h1>Animal Management</h1>
+</header>
+<div class="container">
+
+    <div class="card">
+        <form method="POST" action="/add_animal">
+    <input type="text" name="species" placeholder="Species" required><br><br>
+
+    <input type="text" name="tag_id" placeholder="Tag ID" required><br><br>
+
+    <input type="number" name="age" placeholder="Age" required><br><br>
+
+    <input type="text" name="health_status" placeholder="Health Status" required><br><br>
+
+    <input type="number" name="habitat_id" placeholder="Habitat ID" required><br><br>
+
+    <button type="submit">Add Animal</button>
+</form>
+
+<hr>
+
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Species</th>
+        <th>Tag ID</th>
+        <th>Age</th>
+        <th>Health</th>
+        <th>Habitat</th>
+        <th>Action</th>
+    </tr>
+
+    {% for animal in animals %}
+    <tr>
+        <td>{{ animal[0] }}</td>
+        <td>{{ animal[1] }}</td>
+        <td>{{ animal[2] }}</td>
+        <td>{{ animal[3] }}</td>
+        <td>{{ animal[4] }}</td>
+        <td>{{ animal[5] }}</td>
+        <td>
+           <a href="/edit_animal/{{ animal[0] }}">Edit</a>
+            <a href="/delete_animal/{{ animal[0] }}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+
+    </div>
+</div>
+
+</body>
+</html>

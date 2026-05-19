@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet"
+    href="{{ url_for('static', filename='style.css') }}">
+    <title>Observations</title>
+</head>
+<body>
+<header>
+    <h1>Observation Management</h1>
+</header>
+ <div class="container">
+
+    <div class="card">
+        <form method="POST" action="/add_observation">
+
+    <input type="number" name="animal_id" placeholder="Animal ID" required>
+    <br><br>
+
+    <input type="number" name="staff_id" placeholder="Staff ID" required>
+    <br><br>
+
+    <input type="text" name="location" placeholder="Location" required>
+    <br><br>
+
+    <textarea name="notes" placeholder="Observation Notes"></textarea>
+    <br><br>
+
+    <button type="submit">Add Observation</button>
+
+</form>
+
+<hr>
+
+<table border="1">
+
+    <tr>
+        <th>ID</th>
+        <th>Animal</th>
+        <th>Staff</th>
+        <th>Location</th>
+        <th>Notes</th>
+        <th>Date</th>
+        <th>Action</th>
+    </tr>
+
+    {% for obs in observations %}
+    <tr>
+        <td>{{ obs[0] }}</td>
+        <td>{{ obs[1] }}</td>
+        <td>{{ obs[2] }}</td>
+        <td>{{ obs[3] }}</td>
+        <td>{{ obs[4] }}</td>
+        <td>{{ obs[5] }}</td>
+
+        <td>
+            <a href="/delete_observation/{{ obs[0] }}">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+<br>
+<a href="/dashboard">Back to Dashboard</a>
+    </div>
+ </div>
+
+</body>
+</html>
