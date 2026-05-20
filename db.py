@@ -7,5 +7,4 @@ def get_connection():
 
     conn = psycopg2.connect(database_url)
 
-    return connr
-    
+    return conn
